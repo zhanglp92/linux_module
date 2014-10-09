@@ -26,16 +26,23 @@ static void findList (const struct numList *head);
 
 static void findList (const struct numList *head)
 {
-    struct list_head *pos;
+    struct list_head *pos1;
+    struct numList *pos2;
     struct numList *p;
     int i = 1;
 
-    // 顺序向后遍历
-    list_for_each (pos, &head->list) {
+    // 顺序向后遍历，遍历时的变量pos1 类型为 struct list_head
+    list_for_each (pos1, &head->list) {
 
         // 通过节点的指针域，找到该节点的起始位置
-        p = list_entry (pos, struct numList, list);
-        printk ("Node %d's data: %d \n", i++, p->num);
+        p = list_entry (pos1, struct numList, list);
+    //    printk ("Node %d's data: %d \n", i++, p->num);
+    }
+
+    // 顺序向后遍历，遍历时的变量pos2 类型为 struct numList 
+    list_for_each_entry (pos2, &head->list, list) {
+        
+        printk ("Node %d's data: %d \n", i++, pos2->num);
     }
 }
 
